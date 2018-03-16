@@ -1,7 +1,7 @@
 # Lista 1.
 Mateusz Lewko
 
-## Zadanie 1.
+## Zadanie 1
 
 ```R
 dane <- read.csv("ww0101.csv")
