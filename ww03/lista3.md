@@ -47,6 +47,7 @@ test_a4(X, Y, 0)
 ```
 
 a) statystyka testowa = 3.0594, qt(0.975, df=13) = 2.1604, odrzucamy H0
+
 b) przedział ufności dla różnicy wartości średnich: [1.5346, 8.9098]
 
 ## Zadanie 2
@@ -109,6 +110,25 @@ qnorm(0.975) # 1.959964
 
 wartość_p: 0.01633545, odrzucamy H0 => kobiety częściej używają komunikatorów
 
+## Zadanie 6
+
+```R
+dane <- as.matrix(read.csv("w-03-06.csv", sep=';'))
+(X <- dane[,1])
+(Y <- dane[,2])
+
+var(X)
+# [1] 563.8673
+var(Y)
+# [1] 700.9337
+
+test(Y, X, 200)
+# t = 4.8122; qt(0.975, df=94) = 1.9855; pt(4.8122, df=94) = 1.0000
+# half: 224.4490, left: 214.3614, right: 234.5366
+```
+
+wartość_p bliska 0, odrzucamy H0 => wartość ubezpieczenia wzrosła o co najmniej 200zł
+
 ## Zadanie 7
 
 ```R
@@ -148,4 +168,4 @@ test_a4(X, Y, 0)
 # [1] 0.5596
 ```
 
-wartość_p: 0.5596
+wartość_p: 0.5596, dodatkowy czynnik nie ma wpływu na jakość uprawy
