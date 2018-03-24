@@ -48,7 +48,7 @@ qnorm(0.975)
 2 * pnorm(z)
 ```
 
-wartość_p: 0.04985564
+wartość_p: 0.04985564, na granicy - można odrzucić H0
 
 ## Zadanie 4
 
@@ -105,7 +105,7 @@ qnorm(0.975)
 2 - 2 * pnorm(z)
 ```
 
-wartość_p: 0.4390583
+wartość_p: 0.4390583, nie ma podstaw do odrzucenia H0
 
 ## Zadanie 8
 
