@@ -1,0 +1,52 @@
+\documentclass[a4paper]{article}
+
+\usepackage{fullpage} % Package to use full page
+\usepackage{parskip} % Package to tweak paragraph skipping
+\usepackage{tikz} % Package for drawing
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage[T1]{fontenc}
+\usepackage[polish]{babel}
+\usepackage[utf8]{inputenc}
+
+\title{Test Wilcoxona}
+\author{Mateusz Lewko}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Wstęp}
+
+ Test sumy rang Wilcoxona służy do sprawdzenia, czy wartości próbek pobranych z dwóch niezależnych populacji są jednakowo duże. Innymi słowy, pozwala sprawdzić czy, dwie, losowo wybrane próbki zostały wybrane z populacji o takim samym rozkładzie. 
+
+\subsection{Koniecznie założenia}
+\begin{enumerate}
+    \item Wszystkie obserwacje z obydwu grup są od siebie niezależne.
+    \item Obserwacje możemy porównać i uporządkować.
+    \item Hipoteza zerowa: obserwacje pochodzą z populacji o takim samym rozkładzie.
+    \item Hipoteza alternatywna: rozkłady populacji są różne.
+\end{enumerate}
+
+\section{Metoda obliczania}
+
+The definition of the limit of $f(x)$ at $x=a$ denoted as $f'(a)$ is:
+
+\begin{equation}
+f'(a) = \lim_{h\to0}\frac{f(a+h)-f(a)}{h}
+\end{equation}
+
+The following code can be used in sage to give the above limit:
+
+
+\begin{align}
+y=&ax+b&&\text{(definition of a straight line)}\nonumber\\
+  &f'(a)x+b&&\text{(definition of the derivative)}\nonumber\\
+  &f'(a)x+f(a)-f'(a)a&&\text{(we know that the line intersects $f$ at $(a,f(a))$}\nonumber
+\end{align}
+
+\section{Przybliżanie rozkładem normalnym}
+
+
+\end{document}
