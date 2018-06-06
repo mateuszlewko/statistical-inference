@@ -19,7 +19,7 @@
 
 \section{Wstęp}
 
- Test sumy rang Wilcoxona służy do sprawdzenia, czy wartości próbek pobranych z dwóch niezależnych populacji, są jednakowo duże. Innymi słowy, pozwala sprawdzić, czy dwie, losowo wybrane próbki, zostały wybrane z populacji o takim samym rozkładzie. 
+ Test sumy rang Wilcoxona służy do sprawdzenia, czy wartości próbek pobranych z dwóch niezależnych populacji są jednakowo duże. Innymi słowy, pozwala sprawdzić, czy dwie losowo wybrane próbki zostały wybrane z populacji o takim samym rozkładzie. 
 
 \subsection{Koniecznie założenia}
 \begin{enumerate}
@@ -31,7 +31,7 @@
 
 \section{Metoda obliczania}
 \subsection{Opis testu}
-Po przeprowadzeniu eksperymentu dla dwóch grup osobników, otrzymaliśmy odpowiednio $n_1$ i $n_2$ pomiarów. Chcemy sprawdzić hipotezę, że rozkłady wyników dla obu populacji są takie same ($H_0 : G_1 = G_2$). Test Wilcoxona wykryje przesunięcie $G_1$ względem $G_2$. Gdy podejrzewamy, że grupa pierwsza jest przesunięta w prawo względem grupy pierwszej, to hipoteza alternatywna przyjmuje postać $H_a: G_1 < G_2$. W ogólnym przypadku, gdy nie podejrzewamy żadnego konkretnego kierunku przesunięcia, to  $H_a: G_1 \neq G_2$.
+Po przeprowadzeniu eksperymentu dla dwóch grup osobników, otrzymaliśmy odpowiednio $n_1$ i $n_2$ pomiarów. Chcemy sprawdzić hipotezę, że rozkłady wyników dla obu populacji są takie same ($H_0 : G_1 = G_2$). Test Wilcoxona wykryje przesunięcie $G_1$ względem $G_2$. Gdy podejrzewamy, że grupa pierwsza jest przesunięta w prawo względem grupy drugiej, to hipoteza alternatywna przyjmuje postać $H_a: G_1 > G_2$. W ogólnym przypadku, gdy nie podejrzewamy żadnego konkretnego kierunku przesunięcia, to  $H_a: G_1 \neq G_2$.
 
 Test Wilcoxona bazuje na uporządkowaniu wszystkich $n = n_1 + n_2$ obserwacji. Każda obserwacja otrzymuje rangę: najmniejsza ma rangę równą $1$, a największa rangę $n$. Statystyką testową $W$ będzie suma rang obserwacji dla jednej z grup. Niech 
 \begin{align}
@@ -43,7 +43,7 @@ Po uporządkowaniu obserwacji z dwóch grup otrzymaliśmy następującą kolejno
 \begin{center}
    \begin{tabular}{ | l | l | l | l | l | l | l | }
     \hline
-    Number grupy & 1 & 1 & 2 & 2 & 1 & 2 \\ \hline
+    Numer grupy & 1 & 1 & 2 & 2 & 1 & 2 \\ \hline
     Ranga        & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline
     \end{tabular}
 \end{center}
@@ -60,18 +60,18 @@ W celu wyznaczenia \textit{wartości\_p}, należy znać rozkład prawdopodobień
 \end{enumerate}
 
 \subsection{Obliczanie \textit{wartości\_p}}
-Załóżmy, że $H_a : G_1 > G_2$, wtedy oczekiwalibyśmy, że suma rang w grupie drugiej będzie nadzwyczaj duża, zgodnie z rozkładem sum rang. Stąd \textit{wartość\_p} to 
+Załóżmy, że $H_a : G_1 > G_2$, wtedy oczekiwalibyśmy, że suma rang w grupie pierwszej będzie nadzwyczaj duża, zgodnie z rozkładem sum rang. Stąd \textit{wartość\_p} to 
 \begin{align}
-     \textit{wartości\_p} = P(W \geq w_1)
+     \textit{wartość\_p} = P(W \geq w_1)
 \end{align}
 W przypadku, gdy spodziewamy się, że $H_a : G_1 < G_2$, to \textit{wartość\_p} obliczamy analogicznie.
 
 Dal dwustronnego testu z $H_a : G_1 \neq G_2$, \textit{wartość\_p} przyjmuje postać
 
 \begin{align}
-     \textit{wartości\_p} = 2 * P(W \geq w_1) \\
-     \text{lub}\\
-     \textit{wartości\_p} = 2 * P(W \leq w_1)
+     \textit{wartość\_p} = 2 * P(W \geq w_1) 
+     \text{, lub}\\
+     \textit{wartość\_p} = 2 * P(W \leq w_1)
 \end{align}
 
 w zależności od tego, w którym kwantylu się znajdziemy.
