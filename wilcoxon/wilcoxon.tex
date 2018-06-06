@@ -1,8 +1,8 @@
 \documentclass[a4paper]{article}
 
-\usepackage{fullpage} % Package to use full page
-\usepackage{parskip} % Package to tweak paragraph skipping
-\usepackage{tikz} % Package for drawing
+\usepackage{fullpage}
+\usepackage{parskip}
+% \usepackage{tikz} 
 \usepackage{amsmath}
 \usepackage{hyperref}
 \usepackage[T1]{fontenc}
@@ -19,7 +19,7 @@
 
 \section{Wstęp}
 
- Test sumy rang Wilcoxona służy do sprawdzenia, czy wartości próbek pobranych z dwóch niezależnych populacji są jednakowo duże. Innymi słowy, pozwala sprawdzić czy, dwie, losowo wybrane próbki zostały wybrane z populacji o takim samym rozkładzie. 
+ Test sumy rang Wilcoxona służy do sprawdzenia, czy wartości próbek pobranych z dwóch niezależnych populacji, są jednakowo duże. Innymi słowy, pozwala sprawdzić, czy dwie, losowo wybrane próbki, zostały wybrane z populacji o takim samym rozkładzie. 
 
 \subsection{Koniecznie założenia}
 \begin{enumerate}
@@ -30,23 +30,89 @@
 \end{enumerate}
 
 \section{Metoda obliczania}
+\subsection{Opis testu}
+Po przeprowadzeniu eksperymentu dla dwóch grup osobników, otrzymaliśmy odpowiednio $n_1$ i $n_2$ pomiarów. Chcemy sprawdzić hipotezę, że rozkłady wyników dla obu populacji są takie same ($H_0 : G_1 = G_2$). Test Wilcoxona wykryje przesunięcie $G_1$ względem $G_2$. Gdy podejrzewamy, że grupa pierwsza jest przesunięta w prawo względem grupy pierwszej, to hipoteza alternatywna przyjmuje postać $H_a: G_1 < G_2$. W ogólnym przypadku, gdy nie podejrzewamy żadnego konkretnego kierunku przesunięcia, to  $H_a: G_1 \neq G_2$.
 
-The definition of the limit of $f(x)$ at $x=a$ denoted as $f'(a)$ is:
+Test Wilcoxona bazuje na uporządkowaniu wszystkich $n = n_1 + n_2$ obserwacji. Każda obserwacja otrzymuje rangę: najmniejsza ma rangę równą $1$, a największa rangę $n$. Statystyką testową $W$ będzie suma rang obserwacji dla jednej z grup. Niech 
+\begin{align}
+    w_1 = \text{suma rang obserwacji z grupy pierwszej.}
+\end{align}
 
-\begin{equation}
-f'(a) = \lim_{h\to0}\frac{f(a+h)-f(a)}{h}
-\end{equation}
+\subsection{Przykład obliczania rang}
+Po uporządkowaniu obserwacji z dwóch grup otrzymaliśmy następującą kolejność:
+\begin{center}
+   \begin{tabular}{ | l | l | l | l | l | l | l | }
+    \hline
+    Number grupy & 1 & 1 & 2 & 2 & 1 & 2 \\ \hline
+    Ranga        & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline
+    \end{tabular}
+\end{center}
 
-The following code can be used in sage to give the above limit:
+Wtedy $w_1 = 1 + 2 + 5 = 8$ oraz $w_2 = 3 + 4 + 6 = 13$.
 
+\subsection{Rozkład testu rang}
+W celu wyznaczenia \textit{wartości\_p}, należy znać rozkład prawdopodobieństwa możliwych sum rang. Będziemy wtedy w stanie określić, jak prawdopodobne jest otrzymanie sumy rang jednej z grup, przy założeniu, że grupy pochodzą z tego samego rozkładu. Jeżeli obserwacje pochodzą z tych samych rozkładów, to każda ich kolejność (permutacja) jest tak samo prawdopodobna. To rozumowanie nasuwa następujący sposób na wyznaczenie gęstości sum rang:
+\begin{enumerate}
+    \item Wyznaczyć wszystkie permutacje elementów z jednej grupy.
+    \item Dla każdej permutacji obliczyć sumę jej rang. 
+    \item Częstość występowania danej sumy to prawdopodobieństwo jej otrzymania. Prawdopodobieństwo rang $r$ i $n_1 + n_2 - r$ są takie same -- gęstość jest symetryczna.
+
+\end{enumerate}
+
+\subsection{Obliczanie \textit{wartości\_p}}
+Załóżmy, że $H_a : G_1 > G_2$, wtedy oczekiwalibyśmy, że suma rang w grupie drugiej będzie nadzwyczaj duża, zgodnie z rozkładem sum rang. Stąd \textit{wartość\_p} to 
+\begin{align}
+     \textit{wartości\_p} = P(W \geq w_1)
+\end{align}
+W przypadku, gdy spodziewamy się, że $H_a : G_1 < G_2$, to \textit{wartość\_p} obliczamy analogicznie.
+
+Dal dwustronnego testu z $H_a : G_1 \neq G_2$, \textit{wartość\_p} przyjmuje postać
 
 \begin{align}
-y=&ax+b&&\text{(definition of a straight line)}\nonumber\\
-  &f'(a)x+b&&\text{(definition of the derivative)}\nonumber\\
-  &f'(a)x+f(a)-f'(a)a&&\text{(we know that the line intersects $f$ at $(a,f(a))$}\nonumber
+     \textit{wartości\_p} = 2 * P(W \geq w_1) \\
+     \text{lub}\\
+     \textit{wartości\_p} = 2 * P(W \leq w_1)
 \end{align}
+
+w zależności od tego, w którym kwantylu się znajdziemy.
 
 \section{Przybliżanie rozkładem normalnym}
 
+Jeżeli $n_1$ i $n_2$ są większe od $10$, to statystyka $W$ ma w przybliżaniu rozkład $N(\mu_1, \sigma_1)$, gdzie
+\begin{align}
+    \mu_1 = \frac{n_1 (n_1 + n_2 + 1)}{2} \\
+    \sigma_1 = \sqrt{\frac{n_1 n_2(n_1+n_2+1)}{12}}
+\end{align}
+
+\subsection{Przykład}
+
+Dane są grupy o licznościach $n_1 = 10$, $n_2 = 12$. Chcemy policzyć $P(W_1 \geq 145)$. Wiemy że
+
+\begin{align}
+    P(W_1 \geq w_a) \approx P(Z \geq z) \\ 
+    z = \frac{w_1 - \mu_1}{\sigma_1} \\
+    Z \sim N(0, 1)
+\end{align}
+
+Wtedy, $\mu_1 = 10 \times (10 + 12 + 1)/ 2 = 115$ oraz 
+\begin{align}
+    \sigma_1 = \sqrt{\frac{10 \times 12 \times (10 + 12 + 1)}{12}} = 15.16575 \\
+    P(W_1 \geq 145) \approx P \Big(Z \geq \frac{145-115}{15.16575}\Big) = P(Z \geq 1.978) = 0.024
+\end{align}
+
+\subsection{Uporządkowanie zawierające remisy}
+
+W przypadku występowania remisów po uporządkowaniu obserwacji, wzór na $\sigma_1$ jest następujący
+
+\begin{align}
+    \sigma_1 = \sqrt{\frac{n_1 n_2}{12} \bigg( (n+1) - \sum_{i=1}^{k}{\frac{t_i^{3} -t_i}{n(n-1)}} \bigg)}
+\end{align}
+
+gdzie $n = n_1 + n_2$, $t_i$ to liczba różnych obserwacji z rangą $i$, a $k$ to liczba różnych rang.
+
+\begin{thebibliography}{9}
+\bibitem{ch10} \url{https://www.stat.auckland.ac.nz/~wild/ChanceEnc/Ch10.wilcoxon.pdf}
+\bibitem{wiki} \url{https://en.wikipedia.org/wiki/Mann%E2%80%93Whitney_U_test?oldformat=true}
+\end{thebibliography}
 
 \end{document}
